@@ -1,15 +1,21 @@
 name: STEST
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 env:
-    fu: ${{ secrets.FU }}
+  fu: ${{ secrets.FU }}
 
 jobs:
-    ## echo fu env
-    echo-fu:
-        runs-on: ubuntu-latest
-        steps:
-            - name: echo fu
-              run: echo ${{ env.fu }}
+  ## echo fu env using a script
+  echo-fu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo fu
+        uses: actions/script@v6
+        with:
+          script: |
+            const fu = process.env.fu
+            console.log(fu)
+            const fu2 = ${{ env.fu }};
+            console.log(fu2)
