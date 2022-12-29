@@ -7,15 +7,18 @@ env:
   fu: ${{ secrets.FU }}
 
 jobs:
-  ## echo fu env using a script
-  echo-fu:
+  ## upload artifact with fu as content
+  ## create a json file with fu as content
+  ## upload artifact with json file
+  create:
     runs-on: ubuntu-latest
     steps:
-      - name: echo fu
-        uses: actions/script@v6
+      - name: Create artifact
+        run: |
+          echo ${{ env.fu }} > fu
+          cat fu
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
-          script: |
-            const fu = process.env.fu
-            console.log(fu)
-            const fu2 = ${{ env.fu }};
-            console.log(fu2)
+          name: fu
+          path: fu
