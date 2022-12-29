@@ -1,0 +1,15 @@
+name: STEST
+
+on:
+    workflow_dispatch:
+
+env:
+    fu: ${{ secrets.FU }}
+
+jobs:
+    ## echo fu env
+    echo-fu:
+        runs-on: ubuntu-latest
+        steps:
+            - name: echo fu
+              run: echo ${{ env.fu }}
